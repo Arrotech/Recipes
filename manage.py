@@ -1,7 +1,7 @@
 import os
 import subprocess
 import sys
-from flask import redirect, url_for
+from flask import redirect, url_for, make_response, jsonify
 from flask_script import Manager, Command
 from flask_migrate import Migrate, MigrateCommand
 
@@ -21,7 +21,10 @@ def runserver():
 
     @app.route('/')
     def docs():
-        return redirect(url_for('blueprint_v1.index'), code=302)
+        return make_response(jsonify({
+            "status": "OK",
+            "message": "Welcome to our recipes web services"
+        }), 200)
 
     app.run()
 
